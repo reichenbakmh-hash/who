@@ -168,9 +168,10 @@ html,body{
   display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer;
 }
 .glyph{
-  width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px;
+  width:58px; height:58px; border-radius:16px; display:flex; align-items:center; justify-content:center;
   box-shadow:0 3px 6px rgba(0,0,0,0.6);
 }
+.glyph svg{ width:27px; height:27px; overflow:visible; }
 .glyph-messenger{ background:linear-gradient(135deg,#00b2ff,#006aff); }
 .glyph-insta{ background:linear-gradient(135deg,var(--ig-grad3),var(--ig-grad2),var(--ig-grad1)); }
 .glyph-notes{ background:linear-gradient(135deg,#f5c451,#c99a2e); }
@@ -258,7 +259,7 @@ html,body{
 @keyframes flickerText{ 0%,88%,92%,100%{ opacity:1; } 90%{ opacity:0.35; } }
 
 .tabRow{ display:flex; border-bottom:1px solid #1a1a1a; }
-.tabBtn{ flex:1; background:none; border:none; color:#999; padding:10px; font-family:'Courier Prime',monospace; font-size:12px; cursor:pointer; }
+.tabBtn{ flex:1; background:none; border:none; color:#999; padding:10px 4px; font-family:'Courier Prime',monospace; font-size:11px; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .tabBtn.active{ color:#fff; border-bottom:2px solid #4a9eff; }
 .tabBtn:disabled{ color:#444; cursor:not-allowed; }
 .tabPane{ flex:1; overflow-y:auto; padding:12px; }
@@ -294,8 +295,81 @@ html,body{
   position:fixed; inset:0; background:#000; color:var(--ink); z-index:950;
   display:flex; align-items:center; justify-content:center; text-align:center; padding:2em;
   font-family:'VT323',monospace; font-size:1.5em; line-height:1.7;
+  transition:none;
 }
+#ending.stillness{ animation:breatheSlow 4s ease-in-out infinite; }
+@keyframes breatheSlow{ 0%,100%{ opacity:1; } 50%{ opacity:0.86; } }
+.endingDraft{
+  display:inline-block; background:#161616; border:1px solid #333; border-radius:14px;
+  padding:10px 16px; color:#eafff2; font-family:'Courier Prime',monospace; font-size:0.7em;
+}
+.endingSendHint{ margin-top:1em; font-size:0.55em; color:var(--dim); font-family:'Courier Prime',monospace; letter-spacing:1px; }
+.endingFooter{ font-size:0.5em; color:#444; font-family:'Courier Prime',monospace; letter-spacing:1px; }
+
+/* ---------- Portier (signes de présence) ---------- */
+.glyph-portier{ background:linear-gradient(135deg,#7a2e2e,#2c0c0c); }
+.portierList{ flex:1; overflow-y:auto; padding:10px; }
+.portierRow{ padding:12px; border-bottom:1px solid #1a1a1a; cursor:pointer; }
+.portierRow .portierTime{ font-size:11px; color:#4a9eff; }
+.portierRow .portierDesc{ font-size:13px; color:#ddd; margin-top:2px; }
+.portierRow.creepyRow .portierDesc{ color:var(--blood); }
+.portierRow.creepyRow{ animation:flickerText 3s infinite; }
+
+/* ---------- Bouton "dormir" (avance de jour) ---------- */
+#sleepBtn{
+  display:block; margin:26px auto 0; background:none; border:1px solid var(--dim); color:var(--dim);
+  padding:10px 18px; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; cursor:pointer;
+  border-radius:20px;
+}
+#sleepBtn:active{ transform:scale(0.97); }
+
+/* ---------- Transition de jour ---------- */
+#dayTransition{
+  position:fixed; inset:0; z-index:920; background:#000;
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:2em;
+  font-family:'VT323',monospace; color:var(--ink); font-size:1.8em; letter-spacing:2px;
+}
+
+/* ---------- Monologue intérieur (envie d'arrêter) ---------- */
+#innerVoice{
+  position:absolute; inset:0; z-index:80; background:rgba(4,2,2,0.94);
+  display:flex; align-items:center; padding:2em 1.6em; overflow-y:auto;
+}
+#innerVoiceText{ color:var(--ink); font-size:0.95em; line-height:1.8; text-align:left; }
+#innerVoiceText p{ margin:0 0 1em 0; }
+#innerVoiceText p.cursor::after{ content:'▍'; color:var(--sick); animation:blink 0.9s steps(1) infinite; }
+#innerVoice.tierMid{ background:rgba(20,2,2,0.95); }
+#innerVoice.tierHeavy{ background:rgba(30,0,0,0.97); animation:tremble 0.22s linear infinite; }
+#innerVoice.tierHeavy #innerVoiceText{ color:#e8d8d8; }
+
+/* ---------- Détresse visuelle des paliers avancés ---------- */
+body.dread #vignette{ animation:heartbeatFast 0.9s ease-in-out infinite; }
+@keyframes heartbeatFast{
+  0%,100%{ box-shadow:inset 0 0 24vw rgba(0,0,0,0.92); }
+  50%{ box-shadow:inset 0 0 30vw rgba(120,0,0,0.65); }
+}
+
+/* ---------- Notes : auteur / verrouillage ---------- */
+.noteRow.mineNote .d{ color:var(--sick); }
+.noteRow.articleNote .d{ color:#999; }
+.noteRow.articleNote .t{ font-style:italic; }
+.noteRow.heavyNote{ border-left:3px solid var(--blood); }
+.heavyText{ color:#f2d9d9; }
+
+/* ---------- Chronologie (reconstitution finale) ---------- */
+.chronoBlock{ margin-bottom:18px; font-size:13px; color:#ddd; }
+.chronoBlock .lbl{ font-size:11px; color:#777; margin-bottom:2px; }
+.chronoClaim{ color:#ccc; }
+.chronoToggle{
+  margin-top:6px; background:none; border:1px solid #444; color:#999; font-size:11px;
+  padding:5px 10px; cursor:pointer; font-family:'Courier Prime',monospace;
+}
+.chronoReveal{
+  margin-top:8px; border-left:3px solid var(--blood); padding-left:10px; font-style:italic; color:#f2c9c9;
+}
+.finalBtn{ background:#2b1414; border:1px solid var(--blood); }
 
 ::-webkit-scrollbar{ width:6px; }
 ::-webkit-scrollbar-thumb{ background:#333; }
 
+                                                       
