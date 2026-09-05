@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Les Derniers Échos de Lily</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -53,7 +53,11 @@
       <button class="appicon" data-app="fichiers">
         <span class="glyph glyph-files">🗂️</span><span>Fichiers</span>
       </button>
+      <button class="appicon" data-app="portier">
+        <span class="glyph glyph-portier">🔔</span><span>Portier</span>
+      </button>
     </div>
+    <button id="sleepBtn" class="hidden">🌙 fermer les yeux un instant</button>
   </div>
 
   <div class="appscreen" id="app-messenger">
@@ -105,6 +109,7 @@
       <button class="tabBtn active" data-tab="photos">Photos</button>
       <button class="tabBtn" data-tab="brouillons">Brouillons</button>
       <button class="tabBtn" id="preuvesTab" data-tab="preuves" disabled>🔒 preuves</button>
+      <button class="tabBtn" id="chronologieTab" data-tab="chronologie" disabled>🔒 chrono</button>
     </div>
     <div id="tab-photos" class="tabPane"><div id="photoGrid" class="photoGrid"></div></div>
     <div id="tab-brouillons" class="tabPane hidden">
@@ -118,8 +123,18 @@
     </div>
     <div id="tab-preuves" class="tabPane hidden">
       <div id="preuvesContent"></div>
-      <button class="continueBtn" onclick="triggerEnding()">continuer...</button>
+      <button class="continueBtn" onclick="goToChronologieOrHint()">continuer...</button>
     </div>
+    <div id="tab-chronologie" class="tabPane hidden">
+      <p class="fileHint">Recouper chaque élément avec ce que je sais déjà.</p>
+      <div id="chronologieContent"></div>
+      <button class="continueBtn finalBtn" onclick="triggerEnding()">tout assembler...</button>
+    </div>
+  </div>
+
+  <div class="appscreen" id="app-portier">
+    <div class="appheader"><button class="back" data-back>‹</button><span>Portier</span></div>
+    <div id="portierList" class="portierList"></div>
   </div>
 
   <div id="lightbox" class="hidden">
@@ -131,6 +146,14 @@
   </div>
 
   <div id="notifBanner" class="hidden"></div>
+
+  <div id="innerVoice" class="hidden">
+    <div id="innerVoiceText"></div>
+  </div>
+</div>
+
+<div id="dayTransition" class="hidden">
+  <div id="dayTransitionText"></div>
 </div>
 
 <div id="ending" class="hidden"></div>
