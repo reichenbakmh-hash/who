@@ -24,6 +24,7 @@
     </div>
     <div id="introPhoto" class="hidden">
       <div class="photoFrame">
+        <img class="photoImg" id="introPhotoImg" alt="">
         <div class="photoNoise"></div>
         <div class="photoCaption">salon.jpg — envoyé à l'instant</div>
       </div>
@@ -167,6 +168,7 @@
 
   <div id="lightbox" class="hidden">
     <div class="lightboxFrame">
+      <img id="lightboxImg" class="hidden" alt="">
       <div class="photoNoise"></div>
       <div class="lightboxCaption"></div>
       <button class="lightboxClose" onclick="closeLightbox()">✕</button>
@@ -186,6 +188,11 @@
 
 <div id="ending" class="hidden"></div>
 <div id="finalMonologue" class="hidden"></div>
+<div id="finalReveal" class="hidden">
+  <img id="finalRevealImg" alt="">
+  <div id="finalRevealLine"></div>
+  <div id="finalRevealTitle"></div>
+</div>
 <audio id="endingSong" src="assets/tabidachi_no_uta.mp3" preload="none" loop></audio>
 
 <script src="story.js"></script>
