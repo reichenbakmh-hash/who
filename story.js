@@ -189,3 +189,160 @@ const ENDING = {
   line3:"Aucune réponse n'a encore été envoyée."
 };
 
+/* =====================================================================
+   COUCHE NARRATIVE — ESCALADE, JOURS, MÉMOIRE FRACTURÉE, FIN RÉVISÉE
+   (tout ce qui suit s'ajoute au-dessus sans rien retirer)
+===================================================================== */
+
+/* ---------- Paliers de menace (paliers 1 à 4) ---------- */
+/* Palier 1 = GHOST_LINES (déjà existant, laissé tel quel).
+   Paliers 2 à 4 : messages fantômes plus explicites, adresse directe. */
+const GHOST_LINES_T2 = [
+  "je suis dans ta rue.",
+  "j'ai vu ta lumière s'éteindre puis se rallumer.",
+  "tu ne dors plus, hein.",
+  "j'ai posé la main sur ta porte ce soir.",
+  "continue de chercher. ça me plaît.",
+  "elle te regarde à travers moi.",
+  "tu sens le froid dans ton dos ?",
+  "j'entends ta respiration d'ici."
+];
+const GHOST_LINES_T3 = [
+  "tu as trouvé les preuves. bravo. maintenant arrête.",
+  "je connais ton adresse depuis toujours.",
+  "regarde par la fenêtre.",
+  "je suis juste derrière la vitre.",
+  "ferme ce dossier ou je viens le fermer moi-même.",
+  "elle m'a supplié aussi, au début.",
+  "tu trembles. je le sais sans te voir."
+];
+const GHOST_LINES_T4 = [
+  "tu sais déjà qui je suis.",
+  "arrête de me chercher dehors.",
+  "regarde tes propres mains.",
+  "je n'ai jamais quitté cette maison.",
+  "pardon à qui, déjà ?",
+  "on est seules toutes les deux, depuis le début.",
+  "rejoins-la."
+];
+
+/* ---------- Monologues internes : l'envie d'arrêter, avant de continuer ---------- */
+const INNER_MONOLOGUE = {
+  2: [
+    "Mon cœur cogne trop fort, trop vite, contre mes côtes. Je pourrais fermer l'appli. Éteindre le téléphone. Faire comme si j'avais jamais rien vu.",
+    "Reposer le sujet. Laisser les gens croire au suicide. Laisser Lily reposer, en paix ou en morceaux, peu importe, du moment que j'arrête de trembler comme ça.",
+    "Je pourrais. C'est facile. Il suffit de ne plus regarder l'écran.",
+    "Mais mes doigts rouvrent déjà l'appli avant même que j'aie fini de me le dire.",
+    "Je continue."
+  ],
+  3: [
+    "Le téléphone tombe sur mes genoux, mes mains ne le tiennent plus. Je reste pliée en deux, à respirer par la bouche, l'air qui ne rentre pas assez vite.",
+    "J'ai envie de tout supprimer. L'appli, le compte, les preuves, tout. Faire disparaître ce que j'ai trouvé, comme si ça pouvait faire disparaître ce que ça veut dire.",
+    "Une part de moi voudrait juste dormir. Ne plus rien savoir. Redevenir celle qui, hier encore, croyait que c'était un suicide et rien d'autre.",
+    "Mais je pense au fond de son verre, qu'elle vérifiait toujours. Je pense à ce mot, « Pardon », qui n'était adressé à personne. Ou à moi.",
+    "Je ramasse le téléphone. Je rouvre le dossier."
+  ],
+  4: [
+    "Il y a un homme mort maintenant. Un homme mort, une femme morte, et moi au milieu, qui ne comprends plus dans quel ordre les choses sont arrivées.",
+    "Je voudrais courir. Sortir en pyjama et courir jusqu'à ce que mes poumons brûlent, jusqu'à ne plus penser à rien.",
+    "Mais mes jambes ne bougent pas. Elles ne bougent jamais, dans ces moments-là. Comme si une partie de moi savait déjà qu'il n'y a nulle part où courir.",
+    "Alors je reste assise, les genoux remontés contre la poitrine. Et je continue de chercher, parce que m'arrêter maintenant serait pire que de savoir."
+  ]
+};
+
+/* ---------- Application "Portier" (caméra de l'entrée) — signes de présence ---------- */
+const DOORBELL_EVENTS = [
+  { tier:1, time:"02:47", desc:"Mouvement détecté. Un chat, probablement. On distingue à peine une forme basse qui traverse l'allée." },
+  { tier:2, time:"03:10", desc:"Mouvement détecté. Une silhouette reste immobile près du portail pendant plus de quatre minutes, sans avancer." },
+  { tier:3, time:"03:58", desc:"Mouvement détecté. La silhouette fixe directement la caméra. Elle ne bouge pas quand le flash infrarouge s'allume." },
+  { tier:4, time:"04:12", desc:"Mouvement détecté à l'intérieur. Pas à la porte : dans le salon, filmé depuis un angle qui ne correspond à aucune caméra installée chez moi." }
+];
+
+/* ---------- Contenu débloqué jour par jour ---------- */
+const DAY_TRANSITIONS = {
+  2:"JOUR 2 — je n'ai pas dormi longtemps.",
+  3:"JOUR 3 — les bruits ne s'arrêtent plus, même le jour.",
+  4:"JOUR 4 — plus personne ne me répond.",
+  5:"JOUR 5 — je crois que je touche le fond de tout ça."
+};
+
+const DAY_CONTENT = {
+  2:{
+    antoineMsgs:[
+      { from:"them", text:"j'ai vu quelqu'un traîner devant chez toi hier soir, t'étais pas là ?", time:"mar. 08:40" },
+      { from:"me", text:"si si. j'étais là. j'ai rien vu.", time:"mar. 08:44" }
+    ],
+    journal:{ date:"jour 2 — matin", author:"moi", text:"Des empreintes dans la terre meuble devant ma porte, ce matin. Je n'ai pas réussi à dire si elles partaient de chez moi ou si elles y menaient." },
+    photo:{ desc:"empreintes de pas devant l'entrée", meta:"jour 2 — je n'ai pas vérifié le sens dans lequel elles allaient" }
+  },
+  3:{
+    antoineMsgs:[
+      { from:"them", text:"tu réponds plus, ça m'inquiète. je peux passer ce soir ?", time:"mer. 19:02" },
+      { from:"me", text:"non. pas ce soir. je dois faire un truc, seule.", time:"mer. 19:10" }
+    ],
+    journal:{ date:"jour 3 — soir", author:"moi", text:"Je n'arrive plus à dire précisément ce que j'ai fait hier soir entre 23h et une heure du matin. Ce n'est sans doute rien. Je devais juste être fatiguée." },
+    photo:{ desc:"la serrure de ma propre porte, rayée de l'intérieur", meta:"jour 3 — comme si quelqu'un l'avait forcée depuis chez moi" }
+  },
+  4:{
+    antoineMsgs:[
+      { from:"them", text:"je vais vérifier un truc chez toi ce soir, j'ai un mauvais pressentiment", time:"jeu. 22:15" },
+      { from:"system", text:"Aucune réponse depuis. Dernière connexion affichée : jeu. 22:41.", time:"" }
+    ],
+    journal:{ date:"jour 4", author:"moi", text:"Je ne devrais pas me sentir soulagée. Mais depuis qu'Antoine ne répond plus, la maison me paraît presque calme. Je ne comprends pas pourquoi j'ai pensé ce mot : soulagée." }
+  },
+  5:{
+    journal:{ date:"jour 5", author:"moi", text:"J'ai relu toutes mes notes dans l'ordre, cette nuit, une par une. Ce n'est plus une enquête. C'est un alibi que je me construis à moi-même, et il ne tient plus." }
+  }
+};
+
+/* ---------- Découverte du cadavre (après déverrouillage des preuves) ---------- */
+const CORPSE_DISCOVERY = {
+  notif:"Alerte quartier : un corps a été retrouvé près du parc.",
+  journal:{ date:"jour 4 — actualité locale", author:"article", text:"Le corps d'un homme a été découvert ce matin près du parc, non loin de son domicile. La police évoque une chute ou une agression, sans certitude. Un blouson militaire vert, déchiré à la manche, a été retrouvé à quelques mètres — le même modèle que celui identifié sur la photo prise devant chez Lily." },
+  photo:{ desc:"coupure d'article — corps retrouvé près du parc", meta:"la veste décrite est identique à celle qu'Antoine portait dans presque toutes ses stories. Identique à la mienne aussi, achetée le même jour que la sienne, au même vide-dressing." }
+};
+
+/* ---------- Reconstitution finale : la chronologie qui se retourne ---------- */
+/* Chaque item : ce qu'elle croyait comprendre, puis ce qui cloche quand elle recoupe. */
+const CHRONOLOGIE = [
+  {
+    time:"13h47, le jour même",
+    claim:"Je croyais que ce brouillon — « Pardon. » — avait été tapé par Lily, pour quelqu'un qu'elle n'osait pas nommer.",
+    reveal:"Mais à 13h47 ce jour-là, c'est moi qui avais son téléphone dans la main. J'avais oublié. Ou j'avais préféré oublier."
+  },
+  {
+    time:"le collier de Milo",
+    claim:"Je croyais qu'on l'avait posé devant sa porte pour l'intimider, un avertissement laissé par un rôdeur.",
+    reveal:"Le fermoir était cassé exactement comme le jour où c'est moi qui l'avais détaché du cou de Milo, des semaines plus tôt. Je n'ai aucun souvenir de l'avoir reposé là. Mais mes mains, elles, semblent s'en souvenir."
+  },
+  {
+    time:"la veste sur la photo",
+    claim:"Je croyais reconnaître la veste d'Antoine devant chez Lily, la veille de sa mort.",
+    reveal:"On a acheté la même, toutes les deux, au même vide-dressing de janvier — Lily l'a même écrit une fois, en riant, dans une story. J'ai gardé la mienne au fond du placard depuis. Je ne l'ai plus revue depuis ce soir-là."
+  },
+  {
+    time:"la voix sur le vocal",
+    claim:"Je croyais entendre Lily dire qu'elle avait peur d'Antoine, qu'il venait la nuit.",
+    reveal:"En réécoutant une troisième fois, au casque, il y a un souffle avant chaque phrase que je reconnais. C'est le mien. Ce n'est pas un vocal qu'elle m'a envoyé. C'est un vocal que je me suis envoyé à moi-même, et que j'ai classé dans son dossier."
+  },
+  {
+    time:"le prénom à moitié effacé",
+    claim:"Je croyais que le brouillon griffonné — « ne faites confiance à... » — désignait Antoine, ou un inconnu.",
+    reveal:"Le prénom gratté au dos de la page, presque illisible, je le reconnais quand même. C'est le mien. C'est celui qu'elle criait dans la rue, en mars, en me demandant d'arrêter."
+  }
+];
+
+/* ---------- Fragment de mémoire le plus lourd (débloqué en toute fin) ---------- */
+const HEAVY_MEMORY_NOTE = {
+  date:"23 mars — jamais montré à personne",
+  author:"lily",
+  locked:true,
+  text:"Je n'écris pas ça pour qu'on me plaigne, je l'efface presque aussitôt de partout ailleurs. Cette nuit-là, dans ma chambre, j'ai dit non, plusieurs fois, et ça n'a pas suffi à faire s'arrêter ma meilleure amie. Elle dit que j'ai mal compris, que je dramatise. Je ne sais plus qui croire, même plus moi. Mais j'ai froid, maintenant, dès qu'elle me touche, et je n'ose le dire à personne d'autre qu'à cette page."
+};
+
+/* ---------- Fin révisée : implicite, aucune méthode décrite ---------- */
+const ENDING2 = {
+  vibrate:"Le téléphone vibre. Une fois. Doucement, cette fois.",
+  calm:"Plus aucun grattement à la porte. Plus aucun pas dehors. Le silence est presque confortable.",
+  line1:"Je rouvre la conversation avec Lily. Il n'y a plus rien à y trouver. Je le sais.",
+  line2:"J'écris quand même. Lettre par lettre, sans trembler, pour la première fois depuis des jou
