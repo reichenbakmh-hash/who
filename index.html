@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Les Derniers Échos de Lily</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="vignette"></div>
+<div id="flash"></div>
+<div id="glitchbar"></div>
+
+<div id="preamble">
+  <div id="staticNoise"></div>
+  <div id="shakeWrap">
+    <div id="introText"></div>
+    <div id="introMock" class="hidden">
+      <div class="miniChatHeader"><span class="dot"></span>Lily</div>
+      <div class="miniChatBody">
+        <div class="typingRow"><span class="typingDot"></span><span class="typingDot"></span><span class="typingDot"></span></div>
+      </div>
+    </div>
+    <div id="introPhoto" class="hidden">
+      <div class="photoFrame">
+        <div class="photoNoise"></div>
+        <div class="photoCaption">salon.jpg — envoyé à l'instant</div>
+      </div>
+    </div>
+  </div>
+  <div id="bigFlash" class="hidden"></div>
+  <button id="enterBtn" class="hidden">▶ ENTRER DANS SES COMPTES</button>
+</div>
+
+<div id="phone" class="hidden">
+  <div class="notch"></div>
+  <div class="statusbar">
+    <span id="clock">03:12</span>
+    <span class="sbicons">▂▄▆ 5G 🔋78</span>
+  </div>
+
+  <div id="homescreen">
+    <div class="appgrid">
+      <button class="appicon" data-app="messenger">
+        <span class="glyph glyph-messenger">💬</span><span>Messenger</span>
+      </button>
+      <button class="appicon" data-app="instagram">
+        <span class="glyph glyph-insta">📷</span><span>Instagram</span>
+      </button>
+      <button class="appicon" data-app="notes">
+        <span class="glyph glyph-notes">📓</span><span>Notes</span>
+      </button>
+      <button class="appicon" data-app="fichiers">
+        <span class="glyph glyph-files">🗂️</span><span>Fichiers</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="appscreen" id="app-messenger">
+    <div class="appheader"><button class="back" data-back>‹</button><span>Messages</span></div>
+    <div id="threadList" class="threadList"></div>
+    <div id="threadView" class="threadView hidden">
+      <div class="appheader">
+        <button class="back" data-thread-back>‹</button>
+        <span id="threadAvatar" class="threadAvatar"></span>
+        <span id="threadName"></span>
+        <span id="threadStatus" class="threadStatus"></span>
+      </div>
+      <div id="messagesList" class="messagesList"></div>
+      <div class="inputBar"><span class="inputPlaceholder">Aa</span></div>
+    </div>
+  </div>
+
+  <div class="appscreen" id="app-instagram">
+    <div class="appheader"><button class="back" data-back>‹</button><span class="igLogo">Instagram</span></div>
+    <div class="igScroll">
+      <div class="igProfile">
+        <div class="igAvatar"></div>
+        <div class="igHandle" id="igHandle"></div>
+        <div class="igStats" id="igStats"></div>
+        <div class="igBio" id="igBio"></div>
+      </div>
+      <div class="storiesRow">
+        <div class="storyBubble" id="storyArchived">
+          <div class="storyRing"></div>
+          <span>archivée</span>
+        </div>
+      </div>
+      <div id="igFeed"></div>
+    </div>
+  </div>
+
+  <div class="appscreen" id="app-notes">
+    <div class="appheader"><button class="back" data-back>‹</button><span>Notes</span></div>
+    <div id="notesList" class="notesList"></div>
+    <div id="noteView" class="noteView hidden">
+      <div class="appheader"><button class="back" data-note-back>‹</button><span id="noteDate"></span></div>
+      <div id="noteBody" class="noteBody"></div>
+    </div>
+  </div>
+
+  <div class="appscreen" id="app-fichiers">
+    <div class="appheader"><button class="back" data-back>‹</button><span>Fichiers</span></div>
+    <div class="tabRow">
+      <button class="tabBtn active" data-tab="photos">Photos</button>
+      <button class="tabBtn" data-tab="brouillons">Brouillons</button>
+      <button class="tabBtn" id="preuvesTab" data-tab="preuves" disabled>🔒 preuves</button>
+    </div>
+    <div id="tab-photos" class="tabPane"><div id="photoGrid" class="photoGrid"></div></div>
+    <div id="tab-brouillons" class="tabPane hidden">
+      <p class="fileText" id="brouillonText"></p>
+      <p class="fileHint" id="brouillonHint"></p>
+      <div class="pwrow">
+        <input id="pwInput" type="text" placeholder="mot de passe">
+        <button onclick="tryPassword()">Déverrouiller</button>
+      </div>
+      <div class="errmsg" id="pwError"></div>
+    </div>
+    <div id="tab-preuves" class="tabPane hidden">
+      <div id="preuvesContent"></div>
+      <button class="continueBtn" onclick="triggerEnding()">continuer...</button>
+    </div>
+  </div>
+
+  <div id="lightbox" class="hidden">
+    <div class="lightboxFrame">
+      <div class="photoNoise"></div>
+      <div class="lightboxCaption"></div>
+      <button class="lightboxClose" onclick="closeLightbox()">✕</button>
+    </div>
+  </div>
+
+  <div id="notifBanner" class="hidden"></div>
+</div>
+
+<div id="ending" class="hidden"></div>
+
+<script src="story.js"></script>
+<script src="script.js"></script>
+</body>
+                                                                 </html>
+
